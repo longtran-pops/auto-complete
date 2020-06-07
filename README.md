@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Coding Test _ FrontEnd Round 1
 
-## Available Scripts
+Complete the AutoComplete Component
 
-In the project directory, you can run:
+### Steps
 
-### `yarn start`
+1. Create your own development branch and check for permission
+```sh
+git checkout -b your_name/final_version
+git push -u origin your_name/final_version
+// If you cannot push our own branch, please contact the owner to get the permission
+```
+2. Implement your solution and create a pull request when you complete ([How to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request))
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Requirements
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### Design
 
-### `yarn test`
+The component have 2 versions as shown in the following links:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://longtran713450.invisionapp.com/prototype/AutoComplete-Interview-R1-ckb4r5gf70034ub018ruvu7md
 
-### `yarn build`
+#### Logic
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- When user type, the suggestion list will shows all potential items which matched the input value.
+- When user select an item, the input will be filled with the selected item and the suggestion list will be cleared.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Knowns issues
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- KI-01: Sometimes the suggestion list is not matched with the input value.
+- KI-02: The API is too slow which make end user feel like the function doesn't work.
 
-### `yarn eject`
+### What can you do?
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- You can refactor and edit everything As long as your code can full fill all the designs and logic as described above - Except the **Fake API**
+- No other libraries or frameworks are allowed. Whatever you need, you will need to write them on your own.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Acceptance Criteria
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The pull request need to:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. The component must look like the 2 design - mobile & web
+2. The component's logic need to be full filled
+3. Pull request description should follow this template:
+```
+Added:
+ - General idea of what you have added such as an utility function, base component or so and why do you need to add them.
+Refactored
+ - General idea of what you have refactored such as move a function from component A to component B and why do you need to do that.
+Fixed:
+ - `KI-01`: General idea how to fix issue `KI-01`.
+ - `KI-02`: General idea how to fix issue `KI-02`.
+```
