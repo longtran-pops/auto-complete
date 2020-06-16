@@ -1,26 +1,71 @@
-import { PInput, PListItem, PList } from '../elements'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { PInput, PListItem, PList, PLoading, PNoData } from '../elements'
+
 export default (props) => {
+  const {
+    value = '',
+    width,
+    size,
+    suggestions = [],
+    loading,
+    onChange = () => null,
+    onSelect = () => null
+  } = props
+
+  const [interalValue, setInternalValue] = useState(value)
+  const [interalSuggestions, setInternalSuggestions] = useState(suggestions)
+  const [showSuggestions, setShowsuggestions] = useState(false)
+  const [isNoData, setIsNoData] = useState(false)
+
+  // emit event onChange and show list with value
+  const onChangeInternal = val => {
+    setInternalValue(val)
+    onChange(val)
+    setShowsuggestions(!!val)
+    if(!val){
+      setIsNoData(false)
+      setInternalSuggestions([])
+    }
+  }
+
+  // set select item and emit event onSelect
+  const onSelectInternal = item => {
+    setInternalValue(item)
+    setShowsuggestions(false)
+    setInternalSuggestions([])
+    onSelect(item)
+  }
+
+  useEffect(() => {
+    const noData = suggestions.length === 0 && !!interalValue
+    setIsNoData(noData)
+    setInternalSuggestions(suggestions)
+  }, [suggestions]) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div>
+    <React.Fragment>
       <PInput
-        value={props.value}
-        onChange={(val) => props.onChange && props.onChange(val)}
+        value={interalValue}
+        width={width}
+        size={size}
+        onChange={(val) => onChangeInternal(val)}
       ></PInput>
-      {props.suggestions && props.suggestions.length > 0 ? (
-        <PList>
-          {props.suggestions.map((item) => (
+      {loading && <PList>
+        <PLoading />
+      </PList>}
+      {!loading && <React.Fragment>
+        {showSuggestions && interalSuggestions.length > 0 && <PList>
+          {interalSuggestions.map((item) => (
             <PListItem
               key={item}
-              onPress={() => {
-                props.onSelect && props.onSelect(item)
-              }}
+              onPress={() => onSelectInternal(item)}
             >
               {item}
             </PListItem>
           ))}
-        </PList>
-      ) : null}
-    </div>
+        </PList>}
+        {isNoData && <PList><PNoData /> </PList>}
+      </React.Fragment>}
+    </React.Fragment>
   )
 }

@@ -1,6 +1,8 @@
 import React from 'react'
+
 export default (props) => {
+  const { onPress, children } = props
   return (
-    <p onClick={(e) => props.onPress && props.onPress(e)}>{props.children}</p>
+    <p className="auto-complete__item" onClick={(e) => onPress(e)}>{children}</p>
   )
 }

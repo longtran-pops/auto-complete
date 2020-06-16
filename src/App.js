@@ -1,58 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 import FakeSearchAPI from './fake-api/search'
 import { PAutoComplete } from './components/widgets'
+import { debounce } from './utils'
 import './App.css'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      keyword: '',
-      results: [],
-    }
-  }
-  updateKeyword(keyword) {
-    return new Promise((resolve) => {
-      this.setState(
-        {
-          keyword,
-        },
-        () => resolve(keyword)
-      )
-    })
-  }
-  updateResult(results) {
-    return new Promise((resolve) => {
-      this.setState(
-        {
-          results,
-        },
-        () => resolve()
-      )
-    })
-  }
-  async search(keyword) {
+const App = () => {
+  const [loading, setLoading] = useState(false)
+  const [suggestions, setSuggestions] = useState([])
+
+  const search = debounce(async (keyword) => {
+    if(!keyword) return;
+    setLoading(true)
+
+    // call api
     try {
-      // Update keyword input
-      this.updateKeyword(keyword)
-      // Get all the items which start with `keyword`
-      const results = await FakeSearchAPI.search(keyword)
-      // Update suggestion list
-      this.updateResult(results)
-    } catch (err) {
-      console.error(err)
+      const result = await FakeSearchAPI.search(keyword)
+      setSuggestions(result)
+    } catch(e) {
+      setSuggestions([])
+      console.error(e)
     }
+    setLoading(false)
+  }, 500)
+
+
+  const selectItem = item => {
+    console.log('item select here', item)
   }
-  render() {
-    return (
+
+  return (
+    <div className="app-seach">
       <PAutoComplete
-        value={this.state.keyword}
-        suggestions={this.state.results}
-        onChange={(val) => this.search(val)}
-        onSelect={(item) => this.updateKeyword(item) && this.updateResult([])}
+        width="100%"
+        loading={loading}
+        suggestions={suggestions}
+        onChange={val => search(val)}
+        onSelect={item => selectItem(item)}
       />
-    )
-  }
+    </div>
+  )
 }
 
 export default App
