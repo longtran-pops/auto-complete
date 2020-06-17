@@ -38,6 +38,8 @@ class App extends React.Component {
       this.setState({ loading: false })
 
       this.updateResult(results)
+    } else {
+      console.error('Something wrong.')
     }
   }, 500)
   

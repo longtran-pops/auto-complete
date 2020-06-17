@@ -15,6 +15,9 @@ export default (props) => {
       ></PInput>
       {props.suggestions && props.suggestions.length > 0 ? (
         <PList>
+          {
+            props.loading && <p>Loading...</p>
+          }
           {!props.loading && props.suggestions.map((item) => (
             <PListItem
               key={item}
