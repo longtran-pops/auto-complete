@@ -17,6 +17,7 @@ class App extends React.Component {
     this.state = {
       keyword: '',
       results: [],
+      loading: false,
     }
   }
 
@@ -27,30 +28,38 @@ class App extends React.Component {
   search = debounce(async () => {    
     // Get all the items which start with `keyword`
 
+    this.setState({ loading: true })
+
     const results = await FakeSearchAPI.search(this.state.keyword)
 
     // Update suggestion list
 
     if (results && Array.isArray(results)) {
+      this.setState({ loading: false })
+
       this.updateResult(results)
     }
   }, 500)
   
   render() {
-    const {keyword, results} = this.state
+    const {loading, keyword, results} = this.state
     return (
-      <PAutoComplete
-        value={keyword}
-        suggestions={results}
-        onChange={(val) => {
-          this.updateKeyword(val)
-          this.search()
-        }}
-        onSelect={(val) => {
-          this.updateKeyword(val)
-          this.updateResult([])
-        }}
-      />
+      <>
+        {loading && <div>loading...</div>}
+        <PAutoComplete
+          disabled={loading}
+          value={keyword}
+          suggestions={results}
+          onChange={(val) => {
+            this.updateKeyword(val)
+            this.search()
+          }}
+          onSelect={(val) => {
+            this.updateKeyword(val)
+            this.updateResult([])
+          }}
+        />
+      </>
     )
   }
 }

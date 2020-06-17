@@ -4,6 +4,7 @@ export default (props) => {
   return (
     <div>
       <PInput
+        disabled={props.disabled}
         value={props.value}
         onChange={(val) => props.onChange && props.onChange(val)}
       ></PInput>
