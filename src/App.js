@@ -44,22 +44,19 @@ class App extends React.Component {
   render() {
     const {loading, keyword, results} = this.state
     return (
-      <>
-        {loading && <div>loading...</div>}
-        <PAutoComplete
-          disabled={loading}
-          value={keyword}
-          suggestions={results}
-          onChange={(val) => {
-            this.updateKeyword(val)
-            this.search()
-          }}
-          onSelect={(val) => {
-            this.updateKeyword(val)
-            this.updateResult([])
-          }}
-        />
-      </>
+      <PAutoComplete
+        loading={loading}
+        value={keyword}
+        suggestions={results}
+        onChange={(val) => {
+          this.updateKeyword(val)
+          this.search()
+        }}
+        onSelect={(val) => {
+          this.updateKeyword(val)
+          this.updateResult([])
+        }}
+      />
     )
   }
 }
