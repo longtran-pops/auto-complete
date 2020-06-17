@@ -1,55 +1,55 @@
 import React from 'react'
+import debounce from 'lodash/debounce'
+
+// API
 import FakeSearchAPI from './fake-api/search'
+
+// COMPONENT
 import { PAutoComplete } from './components/widgets'
+
+// STYLE
 import './App.css'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       keyword: '',
       results: [],
     }
   }
-  updateKeyword(keyword) {
-    return new Promise((resolve) => {
-      this.setState(
-        {
-          keyword,
-        },
-        () => resolve(keyword)
-      )
-    })
-  }
-  updateResult(results) {
-    return new Promise((resolve) => {
-      this.setState(
-        {
-          results,
-        },
-        () => resolve()
-      )
-    })
-  }
-  async search(keyword) {
-    try {
-      // Update keyword input
-      this.updateKeyword(keyword)
-      // Get all the items which start with `keyword`
-      const results = await FakeSearchAPI.search(keyword)
-      // Update suggestion list
+
+  updateKeyword = (keyword) => this.setState({keyword})
+
+  updateResult = (results) => this.setState({results})
+
+  search = debounce(async () => {    
+    // Get all the items which start with `keyword`
+
+    const results = await FakeSearchAPI.search(this.state.keyword)
+
+    // Update suggestion list
+
+    if (results && Array.isArray(results)) {
       this.updateResult(results)
-    } catch (err) {
-      console.error(err)
     }
-  }
+  }, 500)
+  
   render() {
+    const {keyword, results} = this.state
     return (
       <PAutoComplete
-        value={this.state.keyword}
-        suggestions={this.state.results}
-        onChange={(val) => this.search(val)}
-        onSelect={(item) => this.updateKeyword(item) && this.updateResult([])}
+        value={keyword}
+        suggestions={results}
+        onChange={(val) => {
+          this.updateKeyword(val)
+          this.search()
+        }}
+        onSelect={(val) => {
+          this.updateKeyword(val)
+          this.updateResult([])
+        }}
       />
     )
   }
