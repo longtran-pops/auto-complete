@@ -1,7 +1,6 @@
 import { PInput, PListItem, PList } from '../elements'
 import React from 'react'
-
-const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1)
+import {capitalizeFirstLetter} from '../../helpers'
 
 export default (props) => {
   return (
@@ -9,7 +8,6 @@ export default (props) => {
       className="auto-complete"
     >
       <PInput
-        disabled={props.loading}
         value={props.value}
         onChange={(val) => props.onChange && props.onChange(val)}
       ></PInput>
@@ -24,11 +22,10 @@ export default (props) => {
               onPress={() => {
                 props.onSelect && props.onSelect(item)
               }}
-              text={{
-                highlighted: props.value,
-                normal: item.replace(capitalizeFirstLetter(props.value), ''),
-              }}
-            />
+            >
+              <strong>{props.value}</strong>
+              {item.replace(capitalizeFirstLetter(props.value), '')}
+            </PListItem>
           ))}
         </PList>
       ) : (

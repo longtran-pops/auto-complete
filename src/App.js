@@ -1,5 +1,5 @@
 import React from 'react'
-import debounce from 'lodash/debounce'
+import {debounce} from './helpers'
 
 // API
 import FakeSearchAPI from './fake-api/search'
@@ -28,15 +28,19 @@ class App extends React.Component {
   search = debounce(async () => {    
     // Get all the items which start with `keyword`
 
+    if (this.state.loading) {
+      return
+    }
+
     this.setState({ loading: true })
 
     const results = await FakeSearchAPI.search(this.state.keyword)
 
+    this.setState({ loading: false })
+
     // Update suggestion list
 
     if (results && Array.isArray(results)) {
-      this.setState({ loading: false })
-
       this.updateResult(results)
     } else {
       console.error('Something wrong.')
