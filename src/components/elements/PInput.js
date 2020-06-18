@@ -6,6 +6,7 @@ export default (props) => {
     <input
       value={props.value}
       onChange={(e) => props.onChange(getValue(e))}
-    ></input>
+      type={props.type}
+    />
   )
 }

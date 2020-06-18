@@ -1,8 +1,10 @@
 import { PInput, PListItem, PList } from '../elements'
+import './PAutoComplete.css'
 import React from 'react'
+
 export default (props) => {
   return (
-    <div>
+    <div className='PAutoCompleteWrapper'>
       <PInput
         value={props.value}
         onChange={(val) => props.onChange && props.onChange(val)}

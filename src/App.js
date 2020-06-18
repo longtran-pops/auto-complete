@@ -45,12 +45,14 @@ class App extends React.Component {
   }
   render() {
     return (
-      <PAutoComplete
-        value={this.state.keyword}
-        suggestions={this.state.results}
-        onChange={(val) => this.search(val)}
-        onSelect={(item) => this.updateKeyword(item) && this.updateResult([])}
-      />
+      <div className="wrapper">
+        <PAutoComplete
+            value={this.state.keyword}
+            suggestions={this.state.results}
+            onChange={(val) => this.search(val)}
+            onSelect={(item) => this.updateKeyword(item) && this.updateResult([])}
+        />
+      </div>
     )
   }
 }

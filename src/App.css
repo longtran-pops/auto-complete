@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.wrapper {
+  text-align: center;
+  margin-top: 27px;
+}
+
+.PAutoCompleteWrapper {
+  display:inline-block;
+  width: 365px;
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    margin-top: 45px;
+  }
+  .PAutoCompleteWrapper {
+    display:inline-block;
+    width: 90%;
+  }
+}
