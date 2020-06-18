@@ -6,7 +6,6 @@ export default {
   search(key) {
     console.log(`Start calling Search API with "${key}" at: ${new Date().toLocaleTimeString()}`)
     return new Promise((resolve) => {
-      setTimeout(() => {
         console.log(
           `Complete calling Search API with "${key}" at: ${new Date().toLocaleTimeString()}`
         )
@@ -15,7 +14,6 @@ export default {
             item.toLocaleLowerCase().startsWith(key.toLocaleLowerCase())
           )
         )
-      }, parseInt(Math.random() * 5000))
     })
   },
 }
