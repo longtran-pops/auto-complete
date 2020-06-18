@@ -1,6 +1,7 @@
 import React from 'react'
 import FakeSearchAPI from './fake-api/search'
 import { PAutoComplete } from './components/widgets'
+import Cache from './cache'
 import './App.css'
 
 const AVERAGE_TYPING_DELAY = 300
@@ -14,6 +15,7 @@ class App extends React.Component {
       isLoading: false,
     }
     this.timer = null
+    this.searchingCache = new Cache({})
   }
   updateKeyword(keyword) {
     this.setState({
@@ -31,19 +33,37 @@ class App extends React.Component {
     })
   }
 
+  getDataFromCache(keyword) {
+    return this.searchingCache.getData(keyword)
+  }
+
   async loadData(keyword) {
-    try {
-      this.updateLoadingState(true)
-      // Get all the items which start with `keyword`
-      const results = await FakeSearchAPI.search(keyword)
-      // Update suggestion list
-      if (this.state.keyword === keyword) {
-        this.updateResult(results)
+    // Get all the items which start with `keyword`
+    const results = await FakeSearchAPI.search(keyword)
+
+    //update cache
+    this.searchingCache.setData(keyword, results)
+
+    return results
+  }
+
+  async getSearchResult(keyword) {
+    let result = this.getDataFromCache(keyword)
+    if (result) {
+      this.loadData(keyword)
+    } else {
+      try {
+        this.updateLoadingState(true)
+        result = await this.loadData(keyword)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.updateLoadingState(false)
       }
-    } catch (err) {
-      console.error(err)
-    } finally {
-      this.updateLoadingState(false)
+    }
+    
+    if (keyword === this.state.keyword) {
+      this.updateResult(result)
     }
   }
 
@@ -56,9 +76,9 @@ class App extends React.Component {
     if (!keyword) {
       this.updateLoadingState(false)
       this.updateResult([])
-    } else {
+    } else { 
       this.timer = setTimeout(
-        () => this.loadData(keyword),
+        () => this.getSearchResult(keyword),
         AVERAGE_TYPING_DELAY
       )
     }

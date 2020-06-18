@@ -2,13 +2,12 @@ import React from 'react'
 import { PInput, PListItem, PList } from '../elements'
 import styles from './PAutoComplete.module.css'
 
-function escapeRegExp(str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
-}
-
 const getHighlightedText = (text, keywork) => {
-  const escapedkeywork = escapeRegExp(keywork)
-  const parts = text.split(new RegExp(`(${escapedkeywork})`, 'gi'))
+  const parts = []
+  const startIndex = text.toLocaleLowerCase().indexOf(keywork.toLocaleLowerCase())
+  parts.push(text.slice(0, startIndex))
+  parts.push(text.slice(startIndex, startIndex + keywork.length))
+  parts.push(text.slice(startIndex + keywork.length))
   return (
     <>
       {parts.map((part, i) => (
