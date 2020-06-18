@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  min-height: 100vh;
+  padding-top: 32px;
 }
 
 .App-logo {
@@ -34,5 +35,15 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.auto-complete-container {
+  width: 100%;
+}
+
+@media (min-width: 575.98px) {
+  .auto-complete-container {
+    width: 300px;
   }
 }

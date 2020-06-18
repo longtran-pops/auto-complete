@@ -1,6 +1,6 @@
 import React from 'react'
 export default (props) => {
   return (
-    <p onClick={(e) => props.onPress && props.onPress(e)}>{props.children}</p>
+    <div className="p-list-item" onClick={(e) => props.onPress && props.onPress(e, props.dataCallback)}>{props.children}</div>
   )
 }

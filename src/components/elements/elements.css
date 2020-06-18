@@ -1,0 +1,26 @@
+.p-input {
+  border: 1px solid #e1e1e1;
+  padding: 8px;
+  outline: none;
+  width: 100%;
+}
+
+.p-list {
+  margin-top: 8px;
+}
+
+.p-list .p-list-item {
+  padding: 8px;
+}
+
+@media (min-width: 575.98px) {
+  .p-list {
+    box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border: 1px solid #e1e1e1;
+  }
+
+  .p-list .p-list-item:not(:last-child) {
+    border-bottom: 1px solid #e1e1e1;
+  }
+}
