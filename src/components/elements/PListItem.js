@@ -1,6 +1,12 @@
 import React from 'react'
+import styles from './PListItem.module.css'
 export default (props) => {
   return (
-    <p onClick={(e) => props.onPress && props.onPress(e)}>{props.children}</p>
+    <p
+      className={styles['item']}
+      onClick={(e) => props.onPress && props.onPress(e)}
+    >
+      {props.children}
+    </p>
   )
 }

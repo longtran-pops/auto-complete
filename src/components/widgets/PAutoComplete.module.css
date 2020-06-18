@@ -1,0 +1,45 @@
+.container {
+  width: 90%;
+  display: inline-block;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 300px;
+  }
+}
+
+.search-bar {
+  background-color: white;
+  position: relative;
+  display: inline-block;
+  border: 1px solid rgb(224, 224, 224);
+  box-sizing: border-box;
+  margin: unset;
+  width: 100%;
+}
+
+.search-bar.search-bar-has-loader {
+  padding-right: 30px;
+}
+
+.loader {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid gray;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
