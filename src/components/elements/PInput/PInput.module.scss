@@ -1,0 +1,24 @@
+$input-size: 40px;
+
+.root {
+  display: flex;
+}
+
+.input {
+  height: $input-size;
+  border: none;
+  outline: none;
+  display: block;
+  width: 100%;
+  padding: 0 15px;
+  font-family: inherit;
+}
+
+.loadingSpinner {
+  width: $input-size;
+  height: $input-size;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

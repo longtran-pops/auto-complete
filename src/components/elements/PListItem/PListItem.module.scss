@@ -1,0 +1,13 @@
+.root {
+  background: white;
+  padding: 12px;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(#E0E0E0, 0.5);
+  }
+
+  &:hover {
+    background: #E0E0E0;
+  }
+}

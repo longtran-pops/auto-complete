@@ -1,0 +1,18 @@
+.root {
+  text-align: center;
+  padding: 15px;
+  background: #F2F2F2;
+  min-height: 100vh;
+}
+
+.innerWrapper {
+  display: inline-block;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  width: 500px;
+  overflow: hidden;
+
+  @media screen and (max-width: 767.98px) {
+    width: 100%;
+  }
+}
