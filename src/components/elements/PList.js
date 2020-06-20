@@ -1,4 +1,8 @@
-import React from 'react'
-export default (props) => {
-  return <div className='result'>{props.children}</div>
+import React, { PureComponent } from "react";
+
+export default class extends PureComponent {
+  render() {
+    const { children } = this.props;
+    return <div className="result shadow-box-result">{children}</div>;
+  }
 }
