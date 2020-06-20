@@ -50,6 +50,12 @@ class App extends React.Component {
     this.updateKeyword(keyword)
   }
 
+  handleSelect = (item) => {
+    this.updateKeyword(item, false)
+
+    this.updateResult([])
+  }
+
   render() {
     const {
       keyword,
@@ -62,11 +68,7 @@ class App extends React.Component {
         value={keyword}
         suggestions={results}
         onChange={this.handleChange}
-        onSelect={(item) => {
-          this.updateKeyword(item, false)
-
-          this.updateResult([])
-        }}
+        onSelect={this.handleSelect}
         {...{ isLoading }}
       />
     )
