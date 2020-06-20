@@ -5,7 +5,6 @@ import { Divider } from "../elements/Divider";
 export default class extends PureComponent {
   render() {
     const { value, onChange, onSelect, results, isLoading } = this.props;
-    console.log(isLoading, "---isLoading");
     return (
       <div className="wrapper-container-input">
         <PInput value={value} onChange={onChange} />
